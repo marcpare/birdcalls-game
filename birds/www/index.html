@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <title></title>
+
+    <link href="lib/ionic/css/ionic.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+
+    <!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
+    <link href="css/ionic.app.css" rel="stylesheet">
+    -->
+
+    <!-- ionic/angularjs js -->
+    <script src="lib/ionic/js/ionic.bundle.js"></script>
+
+    <!-- cordova script (this will be a 404 during development) -->
+    <script src="cordova.js"></script>
+
+    <!-- your app's js -->
+    <script src="js/app.js"></script>
+  </head>
+  <body ng-app="starter">
+    
+    <ion-nav-bar class="nav-title-slide-ios7 bar-stable">
+      <ion-nav-back-button class="button-icon ion-arrow-left-c">
+      </ion-nav-back-button>
+    </ion-nav-bar>
+         
+    <ion-nav-view animation="slide-left-right"></ion-nav-view>
+
+    
+    <script id="home.html" type="text/ng-template">
+    <ion-view title="Cheep! Fzzz">
+      <ion-content>
+        <div class="list list-inset">
+          <label class="item item-input item-select">
+            <div class="input-label">Habitat</div>
+            <select>
+              <option>Marsh</option>
+              <option>Mountain</option>
+              <option>Shore</option>
+              <option>Broadleaf Forest</option>
+              <option>Beach</option>
+            </select>
+          </label>
+          <label class="item item-input item-select">
+            <div class="input-label">At a time</div>
+            <select>
+              <option>5</option>
+              <option>10</option>
+              <option>15</option>
+              <option>20</option>
+              <option>All</option>
+            </select>
+          </label>
+        </div>
+        <div class="padding">
+          <a class="button button-block button-calm" href="#/about">
+            Start
+          </a>
+        </div>
+      </ion-content>
+    </ion-view>  
+    </script>
+    
+    <script id="about.html" type="text/ng-template">
+    <ion-view title="">
+      <ion-content padding="true">
+        <img src="img/bird1.png" />
+        <img src="img/bird2.png" />
+        <img src="img/bird3.png" />
+        <p>Tap a bird for details</p>
+        <div class="bar bar-footer bar-stable">
+          <a href="" class="button">Play</a>
+        </div>
+      </ion-content>
+    </ion-view>
+    </script>
+  </body>
+</html>
