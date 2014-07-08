@@ -22,48 +22,45 @@
     <script src="js/app.js"></script>
   </head>
   <body ng-app="starter">
+    
+    <ion-nav-bar>
+      <ion-nav-back-button class="button-clear">
+          <i class="ion-arrow-left-c"></i> Back
+        </ion-nav-back-button>
+    </ion-nav-bar>
          
-    <ion-nav-view animation="slide-left-right"></ion-nav-view>
+    <ion-nav-view animation="slide-left-right">
+    </ion-nav-view>
     
     <script id="home.html" type="text/ng-template">
-    <ion-view>
-      <ion-content>
-      
-        <div class="list">
+    <ion-view title="Vashon Birds of Summer">
+      <ion-content on-scroll="logScroll()" scrolly>  
+        <div class="list" ng-repeat="habitat in habitats">
           <div class="item item-divider">
-            Marsh
+            {{habitat.habitat}}
           </div>
-          <img width=95 src="img/bird1.png" />
-          <img width=95 src="img/bird2.png" />
-          <img width=95 src="img/bird3.png" />
-          <img width=95 src="img/bird1.png" />
-          <div class="item item-divider">
-            Beach
-          </div>
-          <div class="item item-divider">
-            Forest
-          </div>
-        </div>
-        
-        <div class="padding">
-          <a class="button button-block button-calm" href="#/about">
-            Start
-          </a>
-        </div>
+          <span ng-repeat="bird in habitat.birds">
+            <a href="#/bird/{{bird.id}}">
+              <img ng-src="{{bird.src}}" width=95 />
+            </a>
+          </span>
+        </div>        
       </ion-content>
+      
+      <div class="bar bar-footer bar-calm">
+        <div class="title">Study Marsh</div>
+        <!-- <a class="button button-block button-calm" href="#/about">
+          Study Marsh
+        </a> -->
+      </div>
+      
     </ion-view>  
     </script>
     
     <script id="about.html" type="text/ng-template">
-    <ion-view title="">
+    <ion-view title="Whisting Duck">
       <ion-content padding="true">
-        <img src="img/bird1.png" />
-        <img src="img/bird2.png" />
-        <img src="img/bird3.png" />
-        <p>Tap a bird for details</p>
-        <div class="bar bar-footer bar-stable">
-          <a href="" class="button">Play</a>
-        </div>
+        <img ng-src="img/bird{{id}}.png" />
       </ion-content>
     </ion-view>
     </script>

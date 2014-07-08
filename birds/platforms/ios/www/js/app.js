@@ -9,11 +9,31 @@ angular.module('starter', ['ionic'])
   $stateProvider
     .state('/home', {
       url: '/home',
-      templateUrl: 'home.html'
+      templateUrl: 'home.html',
+      controller: function ($scope) {
+        $scope.birds = [
+          {src: 'img/bird1.png', id:1},
+          {src: 'img/bird2.png', id:2},
+          {src: 'img/bird1.png', id:1},
+          {src: 'img/bird2.png', id:2},
+          {src: 'img/bird1.png', id:1},
+          {src: 'img/bird2.png', id:2},
+          {src: 'img/bird1.png', id:1},
+          {src: 'img/bird2.png', id:2},
+          {src: 'img/bird1.png', id:1},
+          {src: 'img/bird2.png', id:2},
+          {src: 'img/bird1.png', id:1},
+          {src: 'img/bird2.png', id:2},
+          {src: 'img/bird3.png', id:3}
+        ];
+      }
     })
-    .state('/about', {
-      url: '/about',
-      templateUrl: 'about.html'
+    .state('/bird/show', {
+      url: '/bird/:id',
+      templateUrl: 'about.html',
+      controller: function ($scope, $stateParams) {
+        $scope.id = $stateParams.id;
+      }
     });
   $urlRouterProvider.otherwise("/home");
 })
