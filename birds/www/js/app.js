@@ -4,28 +4,12 @@
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 angular.module('starter', ['ionic'])
-
-.directive('scrolly', function () {
+.directive('buttonStudy', function () {
   return {
-    restrict: 'A',
-    link: function (scope, element, attrs) {
-      var raw = element[0];
-      element.bind('scroll', function () {
-        // using prop('offsetTop'), what divider is currently showing?
-        // console.log(element.prop('offsetTop'));
-         // console.log(element[0].querySelectorAll('.item-divider'));
-//          console.log([].forEach.call(element[0].querySelectorAll('.item-divider'), function (e) {
-//            console.log(e.offsetTop);
-//          }));
-        
-        //console.log(attrs);
-        //console.log(attrs.scrolly);
-        //console.log(scope.logScroll);
-      });
-    }
+    restrict: 'E',
+    templateUrl: 'button-study.html'
   };
 })
-
 .config(function ($stateProvider, $urlRouterProvider) {
   $stateProvider
     .state('/home', {
@@ -69,22 +53,7 @@ angular.module('starter', ['ionic'])
             {src: 'img/bird3.png', id:3}
           ]
         }          
-        ];
-        
-        $scope.logScroll = function (e) {
-          //console.log('...');
-          console.log($ionicScrollDelegate);
-          
-          var v = $ionicScrollDelegate.getScrollView();
-          console.log('heres the list');
-          console.log(v);
-          for (var i = 0; i < v.length; i++) {
-            console.log(getPositionInParent(v[i]));
-          }
-          
-          //getPositionInParent()
-          //console.log($ionicScrollDelegate.getScrollPosition());
-        };
+        ];        
       }
     })
     .state('/bird/show', {

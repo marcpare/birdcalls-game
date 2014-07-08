@@ -34,29 +34,30 @@
     
     <script id="home.html" type="text/ng-template">
     <ion-view title="Vashon Birds of Summer">
-      <ion-content on-scroll="logScroll()" scrolly>  
-        <div class="list" ng-repeat="habitat in habitats">
+      <ion-content>  
+        <div class="list card" ng-repeat="habitat in habitats">
           <div class="item item-divider">
-            {{habitat.habitat}}
+            <h2>{{habitat.habitat}}</h2>
           </div>
-          <span ng-repeat="bird in habitat.birds">
-            <a href="#/bird/{{bird.id}}">
-              <img ng-src="{{bird.src}}" width=95 />
-            </a>
-          </span>
-        </div>        
+          <div class="item item-body">
+            <button-study></button-study>
+            <span ng-repeat="bird in habitat.birds">
+              <a href="#/bird/{{bird.id}}">
+                <img ng-src="{{bird.src}}" width=84 />
+              </a>
+            </span>
+            <button-study></button-study>
+          </div>
+        </div>   
       </ion-content>
-      
-      <div class="bar bar-footer bar-calm">
-        <div class="title">Study Marsh</div>
-        <!-- <a class="button button-block button-calm" href="#/about">
-          Study Marsh
-        </a> -->
-      </div>
       
     </ion-view>  
     </script>
     
+    <script id="button-study.html" type="text/ng-template">
+    <button class="button button-block button-positive">Study</button>
+    </script>
+
     <script id="about.html" type="text/ng-template">
     <ion-view title="Whisting Duck">
       <ion-content padding="true">
