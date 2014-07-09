@@ -33,44 +33,68 @@
     </ion-nav-view>
     
     <script id="home.html" type="text/ng-template">
-    <ion-view title="Home">
-      <ion-content>
-      
-        <div class="list">
+    <ion-view title="Vashon Birds of Summer">
+      <ion-content>  
+        <div class="list card" ng-repeat="habitat in habitats">
           <div class="item item-divider">
-            Marsh
+            <h2>{{habitat.habitat}}</h2>
           </div>
-          
-          <span ng-repeat="bird in birds">
-            <a href="#/bird/{{bird.id}}">
-              <img ng-src="{{bird.src}}" width=95 />
-            </a>
-          </span>
-          
-          <div class="item item-divider">
-            Beach
+          <div class="item item-body">
+            <button-study></button-study>
+            <span ng-repeat="bird in habitat.birds">
+              <a href="#/bird/{{bird.id}}">
+                <img ng-src="{{bird.src}}" width=84 />
+              </a>
+            </span>
+            <button-study></button-study>
           </div>
-          <div class="item item-divider">
-            Forest
-          </div>
-        </div>
-        
-        <div class="bar bar-footer bar-balanced">
-          <div class="title">Footer</div>
-          <!-- <a class="button button-block button-calm" href="#/about">
-            Study Marsh
-          </a> -->
-        </div>
-        
+        </div>   
       </ion-content>
+      
     </ion-view>  
     </script>
     
+    <script id="button-study.html" type="text/ng-template">
+    <a href="#/game" class="button button-block button-outline button-calm">
+      <i class="icon ion-university"></i> Study
+    </a>
+    </script>
+
     <script id="about.html" type="text/ng-template">
     <ion-view title="Whisting Duck">
       <ion-content padding="true">
         <img ng-src="img/bird{{id}}.png" />
       </ion-content>
+    </ion-view>
+    </script>
+    
+    <script id="game.html" type="text/ng-template">
+    <ion-view title="Play Sound">
+      
+      <audio id="player" src="http://birdweb.org/birdweb/sounds/gwte.mp3"></audio>
+    
+      <ion-content padding="true">
+        <span ng-repeat="bird in habitat.birds">
+          <a href="#/bird/{{bird.id}}">
+            <img ng-src="{{bird.src}}" width=84 />
+          </a>
+        </span>
+      </ion-content>
+      <div class="bar bar-footer bar-stable">
+        <div class="row row-center">
+          <div class="col col-game">
+            <span class="number-icon">5</span>
+          </div>
+          <div class="col col-game">
+            <span class="play" onclick="document.getElementById('player').play()">
+              <i class="icon ion-play"></i>  
+            </span>
+          </div>
+          <div class="col col-game">
+            <i class="icon ion-shuffle"></i>
+          </div>
+        </div>
+      </div>
     </ion-view>
     </script>
   </body>

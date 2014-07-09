@@ -70,8 +70,44 @@ angular.module('starter', ['ionic'])
     .state('/game', {
       url: '/game',
       templateUrl: 'game.html',
-      controller: function ($scope) {
-        $scope.habitat = API.habitats[0];
+      controller: function ($scope, $location, $timeout) {
+        var player = document.getElementById('player');
+        $scope.state = 'play';
+        var clearGuesses = function () {
+          var birds = $scope.habitat.birds;
+          for (var i = 0, N = birds.length; i < N; i++) {
+            delete birds[i].goodGuess;
+            delete birds[i].badGuess;
+          }
+          $scope.state = 'play';
+        };
+        var makeGuess = function (bird) {
+          //player.pause();
+          //$scope.state = 'play';
+          if (Math.random() < 0.2) {
+            bird.goodGuess = true;
+            $scope.state = 'fadeout';
+            player.pause();
+            $timeout(function () {
+              clearGuesses();
+            }, 500);
+          } else {
+            bird.badGuess = true;
+          }
+          
+        };
+        $scope.mainAction = function () {
+          player.play();
+          $scope.state = 'guess';
+        };
+        $scope.clickBird = function (bird, index) {
+          if ($scope.state == 'play') {
+            $location.path('/bird/'+bird.id);
+          } else if ($scope.state == 'guess') {
+            makeGuess(bird);
+          }
+        }
+        $scope.habitat = API.habitats[0];        
       }
     });
   $urlRouterProvider.otherwise("/home");
