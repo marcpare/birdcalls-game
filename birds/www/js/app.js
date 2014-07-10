@@ -109,6 +109,12 @@ angular.module('starter', ['ionic'])
           $scope.state = 'guess';
         };
         
+        $scope.shuffle = function () {
+          $scope.birds = _.chain($scope.habitat.birds)
+            .shuffle()
+            .first($scope.count)
+            .value();
+        };
         $scope.toggleCount = function () {
           $scope.count = stepper.step();
           $scope.birds = _($scope.habitat.birds).first($scope.count);
