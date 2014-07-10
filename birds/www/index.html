@@ -77,7 +77,7 @@
       <audio id="player" src="{{secretBird.call}}"></audio>
     
       <ion-content padding="true">      
-        <span ng-repeat="bird in habitat.birds">
+        <span ng-repeat="bird in birds">
           <a ng-click="clickBird(bird, $index)" class="overlay-container">
             <img ng-src="{{bird.images[0].src}}" width=84 height=84 />
             <span ng-show="bird.goodGuess" class="overlay overlay-success">yes!</span>
@@ -88,7 +88,7 @@
       <div class="bar bar-footer bar-stable">
         <div class="row row-center">
           <div class="col col-game">
-            <span class="number-icon">5</span>
+            <span class="number-icon" ng-click='toggleCount()'>{{count}}</span>
           </div>
           <div class="col col-game">
             <span ng-switch on="state" class="play" ng-click="mainAction()">

@@ -23,6 +23,22 @@ angular.module('starter', ['ionic'])
     'http://birdweb.org/**'
   ]);
   
+  var stepper = {
+    i: 5,
+    n: 5,
+    N: 10,
+    step: function () {
+      if (this.i === this.N) {
+        this.i = this.n;
+      } else if (this.i+this.n >= this.N) {
+        this.i = this.N;
+      } else {
+        this.i += this.n;
+      }
+      return this.i;
+    }
+  }
+
   $stateProvider
     .state('/home', {
       url: '/home',
@@ -42,20 +58,32 @@ angular.module('starter', ['ionic'])
       url: '/game',
       templateUrl: 'game.html',
       controller: function ($scope, $location, $timeout) {
+        // returns a function that steps by n 
+        // up to an N
+        var makeStep = function (n, N) {
+          var i = 0;
+          return function () {
+            
+          };
+        };
+        
         var player = document.getElementById('player');
         
         // Initialize the game state
         $scope.habitat = API.habitats()[0];
+        stepper.N = $scope.habitat.birds.length;
+        $scope.birds = _($scope.habitat.birds).first(stepper.i);
+        $scope.count = stepper.i;
         
         var dealBird = function () {
-          $scope.secretBird = _.sample($scope.habitat.birds);        
+          $scope.secretBird = _.sample($scope.birds);        
           $scope.state = 'play';
         };
         
         dealBird();
         
         var clearGuesses = function () {
-          var birds = $scope.habitat.birds;
+          var birds = $scope.birds;
           for (var i = 0, N = birds.length; i < N; i++) {
             delete birds[i].goodGuess;
             delete birds[i].badGuess;
@@ -79,6 +107,11 @@ angular.module('starter', ['ionic'])
         $scope.mainAction = function () {
           player.play();
           $scope.state = 'guess';
+        };
+        
+        $scope.toggleCount = function () {
+          $scope.count = stepper.step();
+          $scope.birds = _($scope.habitat.birds).first($scope.count);
         };
         $scope.clickBird = function (bird, index) {
           if ($scope.state == 'play') {
