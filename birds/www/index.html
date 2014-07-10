@@ -17,7 +17,10 @@
 
     <!-- cordova script (this will be a 404 during development) -->
     <script src="cordova.js"></script>
-
+    
+    <script src="lib/underscore/underscore.js"></script>
+    
+    <script src="js/api.js"></script>
     <!-- your app's js -->
     <script src="js/app.js"></script>
   </head>
@@ -43,7 +46,7 @@
             <button-study></button-study>
             <span ng-repeat="bird in habitat.birds">
               <a href="#/bird/{{bird.id}}">
-                <img ng-src="{{bird.src}}" width=84 />
+                <img ng-src="{{bird.images[0].src}}" width=84 />
               </a>
             </span>
             <button-study></button-study>
@@ -71,12 +74,12 @@
     <script id="game.html" type="text/ng-template">
     <ion-view title="Play Sound">
       
-      <audio id="player" src="http://birdweb.org/birdweb/sounds/gwte.mp3"></audio>
+      <audio id="player" src="{{secretBird.call}}"></audio>
     
-      <ion-content padding="true">
+      <ion-content padding="true">      
         <span ng-repeat="bird in habitat.birds">
           <a ng-click="clickBird(bird, $index)" class="overlay-container">
-            <img ng-src="{{bird.src}}" width=84 height=84 />
+            <img ng-src="{{bird.images[0].src}}" width=84 height=84 />
             <span ng-show="bird.goodGuess" class="overlay overlay-success">yes!</span>
             <span ng-show="bird.badGuess" class="overlay overlay-failure">no :(</span>
           </a>

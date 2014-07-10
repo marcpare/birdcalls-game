@@ -5,43 +5,9 @@
 // the 2nd parameter is an array of 'requires'
 
 var API = {
-  habitats: [        
-    {
-      habitat: 'Marsh',
-      birds: [
-        {src: 'img/bird1.png', id:1},
-        {src: 'img/bird2.png', id:2},
-        {src: 'img/bird1.png', id:1},
-        {src: 'img/bird2.png', id:2},
-        {src: 'img/bird1.png', id:1},
-        {src: 'img/bird2.png', id:2},
-        {src: 'img/bird1.png', id:1},
-        {src: 'img/bird2.png', id:2},
-        {src: 'img/bird1.png', id:1},
-        {src: 'img/bird2.png', id:2},
-        {src: 'img/bird1.png', id:1},
-        {src: 'img/bird2.png', id:2}
-      ]
-    },
-    {
-      habitat: 'Beach',
-      birds: [
-        {src: 'img/bird1.png', id:1},
-        {src: 'img/bird2.png', id:2},
-        {src: 'img/bird1.png', id:1},
-        {src: 'img/bird2.png', id:2},
-        {src: 'img/bird1.png', id:1},
-        {src: 'img/bird2.png', id:2},
-        {src: 'img/bird1.png', id:1},
-        {src: 'img/bird2.png', id:2},
-        {src: 'img/bird1.png', id:1},
-        {src: 'img/bird2.png', id:2},
-        {src: 'img/bird1.png', id:1},
-        {src: 'img/bird2.png', id:2},
-        {src: 'img/bird3.png', id:3}
-      ]
-    }          
-  ]   
+  habitats: function () {
+    return DATA.habitats;
+  }
 };
 
 angular.module('starter', ['ionic'])
@@ -51,13 +17,18 @@ angular.module('starter', ['ionic'])
     templateUrl: 'button-study.html'
   };
 })
-.config(function ($stateProvider, $urlRouterProvider) {
+.config(function ($stateProvider, $urlRouterProvider, $sceDelegateProvider) {
+  
+  $sceDelegateProvider.resourceUrlWhitelist([
+    'http://birdweb.org/**'
+  ]);
+  
   $stateProvider
     .state('/home', {
       url: '/home',
       templateUrl: 'home.html',
       controller: function ($scope, $ionicScrollDelegate) {
-        $scope.habitats = API.habitats;     
+        $scope.habitats = API.habitats();
       }
     })
     .state('/bird/show', {
@@ -72,19 +43,28 @@ angular.module('starter', ['ionic'])
       templateUrl: 'game.html',
       controller: function ($scope, $location, $timeout) {
         var player = document.getElementById('player');
-        $scope.state = 'play';
+        
+        // Initialize the game state
+        $scope.habitat = API.habitats()[0];
+        
+        var dealBird = function () {
+          $scope.secretBird = _.sample($scope.habitat.birds);        
+          $scope.state = 'play';
+        };
+        
+        dealBird();
+        
         var clearGuesses = function () {
           var birds = $scope.habitat.birds;
           for (var i = 0, N = birds.length; i < N; i++) {
             delete birds[i].goodGuess;
             delete birds[i].badGuess;
           }
-          $scope.state = 'play';
+          
+          dealBird();
         };
         var makeGuess = function (bird) {
-          //player.pause();
-          //$scope.state = 'play';
-          if (Math.random() < 0.2) {
+          if (bird === $scope.secretBird) {
             bird.goodGuess = true;
             $scope.state = 'fadeout';
             player.pause();
@@ -107,7 +87,6 @@ angular.module('starter', ['ionic'])
             makeGuess(bird);
           }
         }
-        $scope.habitat = API.habitats[0];        
       }
     });
   $urlRouterProvider.otherwise("/home");
