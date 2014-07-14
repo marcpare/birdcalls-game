@@ -22,6 +22,7 @@
     
     <script src="js/api.js"></script>
     <!-- your app's js -->
+    <script src="puget_trough.js"></script>
     <script src="js/app.js"></script>
   </head>
   <body ng-app="starter">
@@ -40,33 +41,43 @@
       <ion-content>  
         <div class="list card" ng-repeat="habitat in habitats">
           <div class="item item-divider">
-            <h2>{{habitat.habitat}}</h2>
+            <h2>{{habitat.name}}</h2>
           </div>
           <div class="item item-body">
             <button-study></button-study>
             <span ng-repeat="bird in habitat.birds">
-              <a href="#/bird/{{bird.id}}">
+              <a href="#/bird/{{$parent.$index}}/{{$index}}">
                 <img ng-src="{{bird.images[0].src}}" width=84 />
               </a>
             </span>
             <button-study></button-study>
           </div>
         </div>   
-      </ion-content>
+      </ion-content> 
       
     </ion-view>  
     </script>
     
     <script id="button-study.html" type="text/ng-template">
-    <a href="#/game" class="button button-block button-outline button-calm">
+    <a href="#/game" class="button button-block button-positive">
       <i class="icon ion-university"></i> Study
     </a>
     </script>
 
     <script id="about.html" type="text/ng-template">
-    <ion-view title="Whisting Duck">
+    <ion-view title="{{ bird.common_name }}">
       <ion-content padding="true">
-        <img ng-src="img/bird{{id}}.png" />
+        <div>
+          <span ng-repeat="image in bird.images">
+            <img src="{{image.src}}" width=370 alt="" />
+          </span>
+        </div>
+        <div>
+          {{ bird.cool_facts }}
+        </div>
+        <div>
+          {{ bird.description}}
+        </div>
       </ion-content>
     </ion-view>
     </script>

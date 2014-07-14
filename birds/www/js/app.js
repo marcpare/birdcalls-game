@@ -20,6 +20,7 @@ angular.module('starter', ['ionic'])
 .config(function ($stateProvider, $urlRouterProvider, $sceDelegateProvider) {
   
   $sceDelegateProvider.resourceUrlWhitelist([
+    'self',
     'http://birdweb.org/**'
   ]);
   
@@ -44,14 +45,21 @@ angular.module('starter', ['ionic'])
       url: '/home',
       templateUrl: 'home.html',
       controller: function ($scope, $ionicScrollDelegate) {
-        $scope.habitats = API.habitats();
+        $scope.habitats = HABITATS;
       }
     })
     .state('/bird/show', {
-      url: '/bird/:id',
+      url: '/bird/:h/:i',
       templateUrl: 'about.html',
       controller: function ($scope, $stateParams) {
-        $scope.id = $stateParams.id;
+        var bird = HABITATS[$stateParams.h].birds[$stateParams.i];
+        
+        console.log($stateParams.h);
+        console.log($stateParams.h);
+        
+        console.log(bird);
+        
+        $scope.bird = bird;
       }
     })
     .state('/game', {
@@ -108,7 +116,6 @@ angular.module('starter', ['ionic'])
           player.play();
           $scope.state = 'guess';
         };
-        
         $scope.shuffle = function () {
           $scope.birds = _.chain($scope.habitat.birds)
             .shuffle()
