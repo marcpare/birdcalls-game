@@ -17,12 +17,14 @@ angular.module('starter', ['ionic'])
     templateUrl: 'button-study.html'
   };
 })
-.config(function ($stateProvider, $urlRouterProvider, $sceDelegateProvider) {
+.config(function ($stateProvider, $urlRouterProvider, $sceProvider) {
   
-  $sceDelegateProvider.resourceUrlWhitelist([
-    'self',
-    'http://birdweb.org/**'
-  ]);
+  $sceProvider.enabled(false);
+  
+  // $sceDelegateProvider.resourceUrlWhitelist([
+  //   'self',
+  //   'http://birdweb.org/**'
+  // ]);
   
   var stepper = {
     i: 5,
@@ -53,12 +55,6 @@ angular.module('starter', ['ionic'])
       templateUrl: 'about.html',
       controller: function ($scope, $stateParams) {
         var bird = HABITATS[$stateParams.h].birds[$stateParams.i];
-        
-        console.log($stateParams.h);
-        console.log($stateParams.h);
-        
-        console.log(bird);
-        
         $scope.bird = bird;
       }
     })
@@ -66,19 +62,11 @@ angular.module('starter', ['ionic'])
       url: '/game',
       templateUrl: 'game.html',
       controller: function ($scope, $location, $timeout) {
-        // returns a function that steps by n 
-        // up to an N
-        var makeStep = function (n, N) {
-          var i = 0;
-          return function () {
-            
-          };
-        };
         
         var player = document.getElementById('player');
         
         // Initialize the game state
-        $scope.habitat = API.habitats()[0];
+        $scope.habitat = HABITATS[0];
         stepper.N = $scope.habitat.birds.length;
         $scope.birds = _($scope.habitat.birds).first(stepper.i);
         $scope.count = stepper.i;

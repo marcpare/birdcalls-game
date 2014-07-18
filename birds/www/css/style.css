@@ -2,7 +2,7 @@
 .bar-footer { height: auto; }
 .play { display: inline-block; border: 1px solid #b2b2b2; width: 50px; height: 50px; border-radius: 25px; padding-top: 12px; padding-left: 4px; color: #43cee6; background: #eee;}
 
-.overlay-container { position: relative; width: 84px; height: 84px; display: inline-block;}
+.overlay-container { position: relative; display: inline-block;}
 .overlay { position: absolute; top: 0; left: 0; bottom: 0; right: 0; text-align: center; line-height: 84px; }
 
 .overlay-success { background: #43cee6; }

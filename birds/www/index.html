@@ -47,7 +47,7 @@
             <button-study></button-study>
             <span ng-repeat="bird in habitat.birds">
               <a href="#/bird/{{$parent.$index}}/{{$index}}">
-                <img ng-src="{{bird.images[0].src}}" width=84 />
+                <img ng-src="img/{{bird.images[0].cdn_src}}" />
               </a>
             </span>
             <button-study></button-study>
@@ -90,7 +90,7 @@
       <ion-content padding="true">      
         <span ng-repeat="bird in birds">
           <a ng-click="clickBird(bird, $index)" class="overlay-container">
-            <img ng-src="{{bird.images[0].src}}" width=84 height=84 />
+            <img ng-src="img/{{bird.images[0].cdn_src}}"  />
             <span ng-show="bird.goodGuess" class="overlay overlay-success">yes!</span>
             <span ng-show="bird.badGuess" class="overlay overlay-failure">no :(</span>
           </a>
