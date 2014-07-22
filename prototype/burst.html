@@ -1,0 +1,81 @@
+    <!-- 
+      
+      Hm... this is sort of a pain for now.
+    
+    Fastest (and most portable): the particle effect as a gif. 
+    
+    A bunch of small circles
+    (1) From a common center
+    (2) Explode in random direction (translate accelerates?)
+    (3) Fade out 
+      
+    -->
+<html>
+  
+  <head>
+    <style>
+    body{ padding: 30px;}
+    #animate {
+      position: absolute;
+      top: 100px;
+      left: 30px;
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      background: green;
+  
+      -webkit-animation: move 3s ease infinite;
+    }
+    
+    .particle-container {
+      position: relative;
+      width: 500px;
+      height: 500px;
+    }
+    
+    .particle { 
+      position: absolute;
+      top: 250px;
+      left: 250px;
+      width: 20px;
+      height: 20px;
+      
+      border-radius: 50%;
+      background: red;
+      
+      -webkit-animation: move 3s ease infinite;
+    }
+    
+    .particle1 { 
+      transform: rotate(5deg);
+    }
+    .particle2 { 
+      top: 50px;
+      transform: rotate(5deg);
+    }
+
+    @-webkit-keyframes move {
+      50% {
+         -webkit-transform: translate(100px, 100px);
+      }
+    }
+    </style>
+  </head>
+  
+  <body>
+    
+    <h1>animate!</h1>
+    
+    <div class="particle-container">
+      <div class="particle particle1"></div>
+      <div class="particle particle2"></div>
+      <div class="particle particle3"></div>
+      <div class="particle particle4"></div>
+      <div class="particle particle5"></div>
+      <div class="particle particle6"></div>
+    </div>
+
+    
+  </body>
+  
+</html>
